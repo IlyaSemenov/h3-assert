@@ -21,11 +21,11 @@ or just simplify throw:
 // Before
 throw createError({
   statusCode: 400,
-  statusMessage: "Validation error.",
+  data: createFlatErrors({ email: "Invalid e-mail address." }),
 })
 
 // After:
-throw400("Validation error.")
+throw400(createFlatErrors({ email: "Invalid e-mail address." }))
 ```
 
 ## Install
