@@ -1,5 +1,6 @@
 import type { ErrorInput } from "./error"
 import { createError } from "./error"
+import { setFunctionName } from "./utils"
 
 function assertError(condition: any, statusCode: number, error?: ErrorInput): asserts condition {
   if (!condition) {
@@ -8,9 +9,10 @@ function assertError(condition: any, statusCode: number, error?: ErrorInput): as
 }
 
 export function createAssert(statusCode: number) {
-  return function assertWithCode(condition: any, statusMessage?: string): asserts condition {
+  function assertWithCode(condition: any, statusMessage?: string): asserts condition {
     assertError(condition, statusCode, statusMessage)
   }
+  return setFunctionName(assertWithCode, `assert${statusCode}`)
 }
 
 export const assert400 = createAssert(400)

@@ -1,14 +1,16 @@
 import type { ErrorInput } from "./error"
 import { createError } from "./error"
+import { setFunctionName } from "./utils"
 
 export function throwError(statusCode: number, error?: ErrorInput) {
   throw createError(statusCode, error)
 }
 
 export function createThrow(statusCode: number) {
-  return function throwWithCode(error?: ErrorInput) {
+  function throwWithCode(error?: ErrorInput) {
     throwError(statusCode, error)
   }
+  return setFunctionName(throwWithCode, `throw${statusCode}`)
 }
 
 export const throw400 = createThrow(400)
