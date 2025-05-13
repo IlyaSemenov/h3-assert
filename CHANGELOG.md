@@ -1,5 +1,11 @@
 # h3-assert
 
+## 1.1.2
+
+### Patch Changes
+
+- ebe0f04: Fix function types (regression after setting closure name).
+
 ## 1.1.1
 
 ### Patch Changes
