@@ -1,6 +1,6 @@
 # h3-assert
 
-Shortcut helpers for throwing HTTP 40x errors in [h3](https://h3.unjs.io/):
+`assert` and `throw` helpers for returning HTTP 40x errors in [h3](https://h3.unjs.io/):
 
 ```ts
 // Before:
@@ -13,6 +13,19 @@ if (!okCondition) {
 
 // After:
 assert404(okCondition, "Object not found.")
+```
+
+or just simplify throw:
+
+```ts
+// Before
+throw createError({
+  statusCode: 400,
+  statusMessage: "Validation error.",
+})
+
+// After:
+throw400("Validation error.")
 ```
 
 ## Install
@@ -46,9 +59,18 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-Available methods:
+## Exported functions
 
-- `assert400`, `assertBadRequest` — throws HTTP 400
-- `assert401`, `assertUnauthorized` — throws HTTP 401
-- `assert403`, `assertForbidden` — throws HTTP 403
-- `assert404`, `assertNotFound` — throws HTTP 404
+Assert functions:
+
+- `assert400`, `assertBadRequest` — throw HTTP 400 if condition not met
+- `assert401`, `assertUnauthorized` — throw HTTP 401 if condition not met
+- `assert403`, `assertForbidden` — throw HTTP 403 if condition not met
+- `assert404`, `assertNotFound` — throw HTTP 404 if condition not met
+
+Throw functions:
+
+- `throw400`, `throwBadRequest` — throw HTTP 400
+- `throw401`, `throwUnauthorized` — throw HTTP 401
+- `throw403`, `throwForbidden` — throw HTTP 403
+- `throw404`, `throwNotFound` — throw HTTP 404

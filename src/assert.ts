@@ -1,15 +1,15 @@
-import { createError } from "h3"
+import type { ErrorInput } from "./error"
+import { createError } from "./error"
 
-// TODO accept either statusMessage or the partial createError argument object.
-export function assert(condition: any, statusCode: number, statusMessage?: string): asserts condition {
+function assertError(condition: any, statusCode: number, error?: ErrorInput): asserts condition {
   if (!condition) {
-    throw createError({ statusCode, statusMessage })
+    throw createError(statusCode, error)
   }
 }
 
 export function createAssert(statusCode: number) {
   return function assertWithCode(condition: any, statusMessage?: string): asserts condition {
-    assert(condition, statusCode, statusMessage)
+    assertError(condition, statusCode, statusMessage)
   }
 }
 

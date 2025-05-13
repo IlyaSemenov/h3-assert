@@ -1,7 +1,8 @@
-import { assert400 } from "h3-assert"
-import { expect, it } from "vitest"
+import { expect, test } from "vitest"
 
-it("assert400", () => {
+import { assert400 } from "./assert"
+
+test("assert400", () => {
   expect(assert400(true)).toBeUndefined()
   expect(() => assert400(false)).toThrowError()
 })
