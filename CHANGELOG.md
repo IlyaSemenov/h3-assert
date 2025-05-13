@@ -1,5 +1,11 @@
 # h3-assert
 
+## 1.1.1
+
+### Patch Changes
+
+- 3dc9258: Actually export new `throwXXX` methods.
+
 ## 1.1.0
 
 ### Minor Changes
