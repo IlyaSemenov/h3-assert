@@ -9,8 +9,8 @@ export function assertHttpError(condition: any, statusCode: number, error?: Erro
 }
 
 export function createAssertHttpError(statusCode: number) {
-  function assertWithCode(condition: any, statusMessage?: string): asserts condition {
-    assertHttpError(condition, statusCode, statusMessage)
+  function assertWithCode(condition: any, error?: ErrorInput): asserts condition {
+    assertHttpError(condition, statusCode, error)
   }
   return setFunctionName(assertWithCode, `assertHttp${statusCode}`)
 }
