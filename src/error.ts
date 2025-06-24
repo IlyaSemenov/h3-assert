@@ -8,7 +8,7 @@ export function createError(statusCode: number, error?: ErrorInput): Partial<H3E
     statusCode,
     ...typeof error === "string"
       ? {
-          statusMessage: error,
+          message: error,
         }
       : {
           data: error,

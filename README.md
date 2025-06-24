@@ -67,7 +67,7 @@ Here's a more concise version:
 
 The error value can be:
 
-- A **string** → Sets `statusMessage` in the response.
+- A **string** → Sets `message` in the JSON response.
 - An **object** → Sets `data` in the JSON response.
 - A **callback** (for `assert` only) → Lazily evaluated if the assertion fails.
 
@@ -76,7 +76,7 @@ The error value can be:
 ```json
 {
   "statusCode": 400,
-  "statusMessage": "Custom error", // If error was a string
+  "message": "Custom error", // If error was a string
   "data": { /* ... */ } // If error was an object
 }
 ```

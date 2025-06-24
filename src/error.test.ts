@@ -2,20 +2,18 @@ import { expect, test } from "vitest"
 
 import { createError } from "./error"
 
-test("createError", () => {
+test("createError variants", () => {
   expect(createError(400)).toMatchObject({
     statusCode: 400,
-    statusMessage: undefined,
     data: undefined,
   })
-  expect(createError(400, "Failed")).toMatchObject({
+  expect(createError(400, "Invalid email.")).toMatchObject({
     statusCode: 400,
-    statusMessage: "Failed",
+    message: "Invalid email.",
     data: undefined,
   })
   expect(createError(400, { root: ["Failed"] })).toMatchObject({
     statusCode: 400,
-    statusMessage: undefined,
     data: { root: ["Failed"] },
   })
 })
