@@ -1,5 +1,16 @@
 # h3-assert
 
+## 2.1.0
+
+### Minor Changes
+
+- 72ef9c4: Support lazy error callbacks for asserts.
+
+### Patch Changes
+
+- bda2afd: Fix error input type for assert shortcuts.
+- 5a6d4bb: Use string error for response `message`, not `statusMessage`.
+
 ## 2.0.0
 
 ### Major Changes
