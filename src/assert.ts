@@ -2,7 +2,7 @@ import type { ErrorInput } from "./error"
 import { createError } from "./error"
 import { setFunctionName } from "./utils"
 
-function assertError(condition: any, statusCode: number, error?: ErrorInput): asserts condition {
+export function assertError(condition: any, statusCode: number, error?: ErrorInput): asserts condition {
   if (!condition) {
     throw createError(statusCode, error)
   }

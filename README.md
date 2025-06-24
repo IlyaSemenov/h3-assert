@@ -67,6 +67,7 @@ Assert functions:
 - `assert401`, `assertUnauthorized` — throw HTTP 401 if condition not met
 - `assert403`, `assertForbidden` — throw HTTP 403 if condition not met
 - `assert404`, `assertNotFound` — throw HTTP 404 if condition not met
+- `assertError` - generic assert with arbitrary status code
 
 Throw functions:
 
@@ -74,3 +75,4 @@ Throw functions:
 - `throw401`, `throwUnauthorized` — throw HTTP 401
 - `throw403`, `throwForbidden` — throw HTTP 403
 - `throw404`, `throwNotFound` — throw HTTP 404
+- `throwError` - generic throw with arbitrary status code
