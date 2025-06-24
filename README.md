@@ -1,31 +1,33 @@
 # h3-assert
 
-`assert` and `throw` helpers for returning HTTP 40x errors in [h3](https://h3.unjs.io/):
+`throw` and `assert` helpers for returning HTTP 4xx and 5xx errors in [h3](https://h3.unjs.io/).
 
-```ts
-// Before:
-if (!okCondition) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: "Object not found."
-  })
-}
-
-// After:
-assert404(okCondition, "Object not found.")
-```
-
-or just simplify throw:
+Throws:
 
 ```ts
 // Before
 throw createError({
   statusCode: 400,
-  data: createFlatErrors({ email: "Invalid e-mail address." }),
+  data: { email: "Invalid e-mail address." },
 })
 
 // After:
-throw400(createFlatErrors({ email: "Invalid e-mail address." }))
+throwHttp400BadRequest({ email: "Invalid e-mail address." })
+```
+
+Asserts:
+
+```ts
+// Before:
+if (!post) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Post not found."
+  })
+}
+
+// After:
+assertHttp404NotFound(post, "Post not found.")
 ```
 
 ## Install
@@ -39,7 +41,7 @@ npm install h3-assert
 In a h3 request handler:
 
 ```ts
-import { assert404 } from "h3-assert"
+import { assertHttp404NotFound } from "h3-assert"
 
 export default defineEventHandler(async (event) => {
   const postId = getRouterParam(event, "postId")!
@@ -50,7 +52,7 @@ export default defineEventHandler(async (event) => {
     .select("title", "text")
 
   // Will throw Error 404 if post not found.
-  assert404(task, "Post not found.")
+  assertHttp404NotFound(post, "Post not found.")
 
   // post is typed as not undefined now.
   console.log(post.text)
@@ -61,18 +63,34 @@ export default defineEventHandler(async (event) => {
 
 ## Exported functions
 
-Assert functions:
+### 4xx Client Errors
 
-- `assert400`, `assertBadRequest` — throw HTTP 400 if condition not met
-- `assert401`, `assertUnauthorized` — throw HTTP 401 if condition not met
-- `assert403`, `assertForbidden` — throw HTTP 403 if condition not met
-- `assert404`, `assertNotFound` — throw HTTP 404 if condition not met
-- `assertError` - generic assert with arbitrary status code
+- `throwHttp400BadRequest` / `assertHttp400BadRequest`
+- `throwHttp401Unauthorized` / `assertHttp401Unauthorized`
+- `throwHttp402PaymentRequired` / `assertHttp402PaymentRequired`
+- `throwHttp403Forbidden` / `assertHttp403Forbidden`
+- `throwHttp404NotFound` / `assertHttp404NotFound`
+- `throwHttp405MethodNotAllowed` / `assertHttp405MethodNotAllowed`
+- `throwHttp406NotAcceptable` / `assertHttp406NotAcceptable`
+- `throwHttp407ProxyAuthenticationRequired` / `assertHttp407ProxyAuthenticationRequired`
+- `throwHttp409Conflict` / `assertHttp409Conflict`
+- `throwHttp410Gone` / `assertHttp410Gone`
+- `throwHttp411LengthRequired` / `assertHttp411LengthRequired`
+- `throwHttp412PreconditionFailed` / `assertHttp412PreconditionFailed`
+- `throwHttp413PayloadTooLarge` / `assertHttp413PayloadTooLarge`
+- `throwHttp415UnsupportedMediaType` / `assertHttp415UnsupportedMediaType`
+- `throwHttp422UnprocessableEntity` / `assertHttp422UnprocessableEntity`
+- `throwHttp429TooManyRequests` / `assertHttp429TooManyRequests`
 
-Throw functions:
+### 5xx Server Errors
 
-- `throw400`, `throwBadRequest` — throw HTTP 400
-- `throw401`, `throwUnauthorized` — throw HTTP 401
-- `throw403`, `throwForbidden` — throw HTTP 403
-- `throw404`, `throwNotFound` — throw HTTP 404
-- `throwError` - generic throw with arbitrary status code
+- `throwHttp500InternalServerError` / `assertHttp500InternalServerError`
+- `throwHttp501NotImplemented` / `assertHttp501NotImplemented`
+- `throwHttp502BadGateway` / `assertHttp502BadGateway`
+- `throwHttp503ServiceUnavailable` / `assertHttp503ServiceUnavailable`
+- `throwHttp504GatewayTimeout` / `assertHttp504GatewayTimeout`
+
+### Generic
+
+- `throwHttpError` / `assertHttpError` - throw or assert with arbitrary status code
+- `createThrowHttpError` / `createAssertHttpError` - create shortcut function for arbitrary HTTP codes

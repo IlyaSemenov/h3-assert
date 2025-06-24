@@ -1,12 +1,11 @@
 import { expect, test } from "vitest"
 
-import { throw400, throwBadRequest } from "./throw"
+import { throwHttp400BadRequest } from "./throw"
 
-test("throw400", () => {
-  expect(() => throw400()).toThrowError()
+test("throwHttp400BadRequest", () => {
+  expect(() => throwHttp400BadRequest()).toThrowError()
 })
 
 test("throw function name", () => {
-  expect(throw400.name).toEqual("throw400")
-  expect(throwBadRequest.name).toEqual("throw400")
+  expect(throwHttp400BadRequest.name).toEqual("throwHttp400")
 })
