@@ -1,5 +1,11 @@
 # h3-assert
 
+## 1.1.3
+
+### Patch Changes
+
+- bd95e56: Export generic `assertError`.
+
 ## 1.1.2
 
 ### Patch Changes
