@@ -61,19 +61,17 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-Here's a more concise version:
-
 ## Error Format
 
 The error value can be:
 
-- A **string** → Sets `message` in the JSON response.
-- An **object** → Sets `data` in the JSON response.
-- A **callback** (for `assert` only) → Lazily evaluated if the assertion fails.
+- **string** - sets `message` in the JSON response.
+- **object** - sets `data` in the JSON response.
+- **callback** (returning either of the above, for `assert` only) - lazily evaluated if the assertion fails.
 
 ### Response Structure
 
-```json
+```json5
 {
   "statusCode": 400,
   "message": "Custom error", // If error was a string
@@ -81,7 +79,7 @@ The error value can be:
 }
 ```
 
-**Examples:**
+### Examples
 
 ```ts
 // String error
