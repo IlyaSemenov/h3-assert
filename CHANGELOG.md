@@ -1,5 +1,13 @@
 # h3-assert
 
+## 2.0.0
+
+### Major Changes
+
+- 6ac8e94: Export a single function per HTTP code (e.g. `assert400` and `assertBadRequest` replaced with `assertHttp400BadRequest`).
+
+  Add more exports for HTTP codes 400-429 and 500-504.
+
 ## 1.1.3
 
 ### Patch Changes
