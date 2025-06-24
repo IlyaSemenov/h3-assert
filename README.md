@@ -61,6 +61,39 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
+Here's a more concise version:
+
+## Error Format
+
+The error value can be:
+
+- A **string** → Sets `statusMessage` in the response.
+- An **object** → Sets `data` in the JSON response.
+- A **callback** (for `assert` only) → Lazily evaluated if the assertion fails.
+
+### Response Structure
+
+```json
+{
+  "statusCode": 400,
+  "statusMessage": "Custom error", // If error was a string
+  "data": { /* ... */ } // If error was an object
+}
+```
+
+**Examples:**
+
+```ts
+// String error
+throwHttp400BadRequest("Invalid input")
+
+// Object error
+throwHttp422UnprocessableEntity({ field: "Email already exists" })
+
+// Callback (assert only)
+assertHttp404NotFound(post, () => `Post ${postId} not found`)
+```
+
 ## Exported functions
 
 ### 4xx Client Errors
