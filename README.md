@@ -22,7 +22,7 @@ Asserts:
 if (!post) {
   throw createError({
     statusCode: 404,
-    statusMessage: "Post not found."
+    message: "Post not found."
   })
 }
 
