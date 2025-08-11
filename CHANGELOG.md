@@ -1,5 +1,12 @@
 # h3-errors
 
+## 3.0.0
+
+### Major Changes
+
+- 6ad6dda: Remove all throw helpers. Use `throw createHttpXXX(...)` instead.
+- 9593a55: Rename package to `h3-errors`.
+
 ## 2.1.0
 
 ### Minor Changes
