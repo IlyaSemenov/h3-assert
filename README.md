@@ -1,19 +1,6 @@
 # h3-assert
 
-`throw` and `assert` helpers for returning HTTP 4xx and 5xx errors in [h3](https://h3.unjs.io/).
-
-Throws:
-
-```ts
-// Before
-throw createError({
-  statusCode: 400,
-  data: { email: "Invalid e-mail address." },
-})
-
-// After:
-throwHttp400BadRequest({ email: "Invalid e-mail address." })
-```
+`assert` and `createError` helpers for throwing HTTP 4xx and 5xx errors in [h3](https://h3.unjs.io/).
 
 Asserts:
 
@@ -28,6 +15,19 @@ if (!post) {
 
 // After:
 assertHttp404NotFound(post, "Post not found.")
+```
+
+Throws:
+
+```ts
+// Before:
+throw createError({
+  statusCode: 400,
+  data: { email: "Invalid e-mail address." },
+})
+
+// After:
+throw createHttp400BadRequest({ email: "Invalid e-mail address." })
 ```
 
 ## Install
@@ -83,10 +83,10 @@ The error value can be:
 
 ```ts
 // String error
-throwHttp400BadRequest("Invalid input")
+throw createHttp400BadRequest("Invalid input")
 
 // Object error
-throwHttp422UnprocessableEntity({ field: "Email already exists" })
+throw createHttp422UnprocessableEntity({ field: "Email already exists" })
 
 // Callback (assert only)
 assertHttp404NotFound(post, () => `Post ${postId} not found`)
@@ -96,32 +96,32 @@ assertHttp404NotFound(post, () => `Post ${postId} not found`)
 
 ### 4xx Client Errors
 
-- `throwHttp400BadRequest` / `assertHttp400BadRequest`
-- `throwHttp401Unauthorized` / `assertHttp401Unauthorized`
-- `throwHttp402PaymentRequired` / `assertHttp402PaymentRequired`
-- `throwHttp403Forbidden` / `assertHttp403Forbidden`
-- `throwHttp404NotFound` / `assertHttp404NotFound`
-- `throwHttp405MethodNotAllowed` / `assertHttp405MethodNotAllowed`
-- `throwHttp406NotAcceptable` / `assertHttp406NotAcceptable`
-- `throwHttp407ProxyAuthenticationRequired` / `assertHttp407ProxyAuthenticationRequired`
-- `throwHttp409Conflict` / `assertHttp409Conflict`
-- `throwHttp410Gone` / `assertHttp410Gone`
-- `throwHttp411LengthRequired` / `assertHttp411LengthRequired`
-- `throwHttp412PreconditionFailed` / `assertHttp412PreconditionFailed`
-- `throwHttp413PayloadTooLarge` / `assertHttp413PayloadTooLarge`
-- `throwHttp415UnsupportedMediaType` / `assertHttp415UnsupportedMediaType`
-- `throwHttp422UnprocessableEntity` / `assertHttp422UnprocessableEntity`
-- `throwHttp429TooManyRequests` / `assertHttp429TooManyRequests`
+- `createHttp400BadRequest` / `assertHttp400BadRequest`
+- `createHttp401Unauthorized` / `assertHttp401Unauthorized`
+- `createHttp402PaymentRequired` / `assertHttp402PaymentRequired`
+- `createHttp403Forbidden` / `assertHttp403Forbidden`
+- `createHttp404NotFound` / `assertHttp404NotFound`
+- `createHttp405MethodNotAllowed` / `assertHttp405MethodNotAllowed`
+- `createHttp406NotAcceptable` / `assertHttp406NotAcceptable`
+- `createHttp407ProxyAuthenticationRequired` / `assertHttp407ProxyAuthenticationRequired`
+- `createHttp409Conflict` / `assertHttp409Conflict`
+- `createHttp410Gone` / `assertHttp410Gone`
+- `createHttp411LengthRequired` / `assertHttp411LengthRequired`
+- `createHttp412PreconditionFailed` / `assertHttp412PreconditionFailed`
+- `createHttp413PayloadTooLarge` / `assertHttp413PayloadTooLarge`
+- `createHttp415UnsupportedMediaType` / `assertHttp415UnsupportedMediaType`
+- `createHttp422UnprocessableEntity` / `assertHttp422UnprocessableEntity`
+- `createHttp429TooManyRequests` / `assertHttp429TooManyRequests`
 
 ### 5xx Server Errors
 
-- `throwHttp500InternalServerError` / `assertHttp500InternalServerError`
-- `throwHttp501NotImplemented` / `assertHttp501NotImplemented`
-- `throwHttp502BadGateway` / `assertHttp502BadGateway`
-- `throwHttp503ServiceUnavailable` / `assertHttp503ServiceUnavailable`
-- `throwHttp504GatewayTimeout` / `assertHttp504GatewayTimeout`
+- `createHttp500InternalServerError` / `assertHttp500InternalServerError`
+- `createHttp501NotImplemented` / `assertHttp501NotImplemented`
+- `createHttp502BadGateway` / `assertHttp502BadGateway`
+- `createHttp503ServiceUnavailable` / `assertHttp503ServiceUnavailable`
+- `createHttp504GatewayTimeout` / `assertHttp504GatewayTimeout`
 
 ### Generic
 
-- `throwHttpError` / `assertHttpError` - throw or assert with arbitrary status code
-- `createThrowHttpError` / `createAssertHttpError` - create shortcut function for arbitrary HTTP codes
+- `createHttpError` / `assertHttpError` - create or assert with arbitrary status code
+- `createCreateHttpError` / `createAssertHttpError` - create shortcut function for arbitrary HTTP codes

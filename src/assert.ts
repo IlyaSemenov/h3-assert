@@ -1,5 +1,5 @@
 import type { ErrorInput } from "./error"
-import { createError } from "./error"
+import { createHttpError } from "./error"
 import { setFunctionName } from "./utils"
 
 export type ErrorInputFunction = () => ErrorInput
@@ -8,7 +8,7 @@ export function assertHttpError(condition: any, statusCode: number, error?: Erro
   if (!condition) {
     // Not exactly sure why the cast is needed here.
     const errorValue = typeof error === "function" ? (error as ErrorInputFunction)() : error
-    throw createError(statusCode, errorValue)
+    throw createHttpError(statusCode, errorValue)
   }
 }
 

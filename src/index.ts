@@ -1,2 +1,2 @@
 export * from "./assert"
-export * from "./throw"
+export * from "./error"
