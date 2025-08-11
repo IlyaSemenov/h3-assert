@@ -1,4 +1,4 @@
-# h3-assert
+# h3-errors
 
 `assert` and `createError` helpers for throwing HTTP 4xx and 5xx errors in [h3](https://h3.unjs.io/).
 
@@ -33,7 +33,7 @@ throw createHttp400BadRequest({ email: "Invalid e-mail address." })
 ## Install
 
 ```sh
-npm install h3-assert
+npm install h3-errors
 ```
 
 ## Use
@@ -41,7 +41,7 @@ npm install h3-assert
 In a h3 request handler:
 
 ```ts
-import { assertHttp404NotFound } from "h3-assert"
+import { assertHttp404NotFound } from "h3-errors"
 
 export default defineEventHandler(async (event) => {
   const postId = getRouterParam(event, "postId")!

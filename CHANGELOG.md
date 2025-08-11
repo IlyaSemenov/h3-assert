@@ -1,4 +1,4 @@
-# h3-assert
+# h3-errors
 
 ## 2.1.0
 
